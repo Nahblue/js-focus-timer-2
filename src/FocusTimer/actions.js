@@ -29,8 +29,8 @@ export function reset() {
   document.getElementById('btnPlay').classList.remove('secondary')
   document.getElementById('btnPause').classList.remove('secondary')
 
-  sounds.buttonPressAudio.play()
   sounds.kitchenTimer.pause()
+  sounds.buttonPressAudio.play()
 }
 
 export function plus5() {
