@@ -5,7 +5,10 @@ import * as sounds from './sounds.js'
 export function toggleRunning() {
   state.isRunning = document.documentElement.classList.toggle('running')
 
-  handleBtnClasslist()
+  document.getElementById('btnPlay').classList.add('secondary')
+  document.getElementById('btnPause').classList.add('secondary')
+  
+  document.getElementById('btnReset').classList.remove('secondary')
 
   timer.countDown()
   sounds.buttonPressAudio.play()
@@ -20,9 +23,14 @@ export function reset() {
   document.getElementById('seconds').innerText = String(state.seconds).padStart(2, "0")
   
   document.documentElement.classList.remove('running')
-  handleBtnClasslist()
+
+  document.getElementById('btnReset').classList.add('secondary')
+
+  document.getElementById('btnPlay').classList.remove('secondary')
+  document.getElementById('btnPause').classList.remove('secondary')
 
   sounds.buttonPressAudio.play()
+  sounds.kitchenTimer.pause()
 }
 
 export function plus5() {
@@ -38,6 +46,12 @@ export function plus5() {
 
 export function minus5() {
   if(state.minutes === 0) {
+    return
+  }
+
+  if(state.minutes <= 5 && state.isRunning) {
+    reset()
+    sounds.kitchenTimer.play()
     return
   }
 
@@ -76,11 +90,4 @@ export function stopMusic() {
   sounds.musicRain.pause();
   sounds.musicCoffeShop.pause();
   sounds.musicFireplace.pause();
-}
-
-function handleBtnClasslist() {
-
-  document.getElementById('btnReset').classList.toggle('secondary')
-  document.getElementById('btnPlay').classList.toggle('secondary')
-  document.getElementById('btnPause').classList.toggle('secondary')
 }

@@ -22,6 +22,9 @@ export function countDown() {
   if(minutes < 0) {
     reset()
     kitchenTimer.play()
+    document.getElementById('btnPlay').classList.add('secondary')
+    document.getElementById('btnReset').classList.remove('secondary')
+    
     return
   }
 
