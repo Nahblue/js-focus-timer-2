@@ -1,6 +1,7 @@
 import state from './state.js'
 import * as timer from './timer.js'
 import * as sounds from './sounds.js'
+import * as el from './elements.js'
 
 export function toggleRunning() {
   state.isRunning = document.documentElement.classList.toggle('running')
@@ -34,29 +35,31 @@ export function reset() {
 }
 
 export function plus5() {
-  if(state.minutes >= 60) {
+  let minutes = Number(el.minutes.textContent)
+
+  if(minutes > 55) {
     return
   }
 
-  state.minutes += 5
-  document.getElementById('minutes').innerText = String(state.minutes).padStart(2, "0")
-
+  minutes += 5
+  document.getElementById('minutes').innerText = String(minutes).padStart(2, "0")
+  
   sounds.buttonPressAudio.play()
 }
 
 export function minus5() {
-  if(state.minutes === 0) {
+  let minutes = Number(el.minutes.textContent)
+
+  if(minutes === 0) {
     return
   }
 
-  if(state.minutes <= 5 && state.isRunning) {
-    reset()
-    sounds.kitchenTimer.play()
+  if(minutes <= 5 && state.isRunning) {
     return
   }
 
-  state.minutes -= 5
-  document.getElementById('minutes').innerText = String(state.minutes).padStart(2, "0")
+  minutes -= 5
+  document.getElementById('minutes').innerText = String(minutes).padStart(2, "0")
 
   sounds.buttonPressAudio.play()
 }

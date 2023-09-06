@@ -14,6 +14,7 @@ export function countDown() {
   let seconds = Number(el.seconds.textContent)
 
   seconds--
+
   if(seconds < 0) {
     seconds = 59
     minutes--
@@ -22,12 +23,12 @@ export function countDown() {
   if(minutes < 0) {
     reset()
     kitchenTimer.play()
+
     document.getElementById('btnPlay').classList.add('secondary')
     document.getElementById('btnReset').classList.remove('secondary')
     
     return
   }
-
 
   updateDisplay(minutes, seconds)
 
